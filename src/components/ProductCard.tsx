@@ -41,7 +41,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 transition-transform hover:-translate-y-1 hover:border-emerald-500/40">
+      <div className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 transition-transform hover:-translate-y-1 hover:border-amber-400/40">
         <div
           className="relative aspect-4/5 w-full cursor-zoom-in overflow-hidden bg-neutral-800"
           onTouchStart={handleTouchStart}
@@ -56,7 +56,7 @@ export function ProductCard({ product }: { product: Product }) {
             sizes="(max-width: 768px) 50vw, 25vw"
           />
           <div className="absolute left-3 top-3 flex flex-col items-start gap-1">
-            <span className="rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+            <span className="rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-300">
               {product.category === "retro" ? "Retro" : "Jugador"}
             </span>
             <span

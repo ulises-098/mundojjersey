@@ -22,7 +22,7 @@ export function CatalogFilters({
   }
 
   const selectClass =
-    "rounded-full border border-white/10 bg-neutral-800 px-4 py-2 text-sm font-semibold text-neutral-200 focus:border-emerald-500 focus:outline-none";
+    "rounded-full border border-white/10 bg-neutral-800 px-4 py-2 text-sm font-semibold text-neutral-200 focus:border-amber-500 focus:outline-none";
 
   return (
     <div className="mb-8 flex flex-wrap justify-center gap-3">

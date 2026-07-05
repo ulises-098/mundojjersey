@@ -18,7 +18,7 @@ export default async function AdminPage() {
         <div className="flex gap-3">
           <Link
             href="/admin/new"
-            className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500"
+            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-neutral-950 hover:bg-amber-400"
           >
             + Nueva remera
           </Link>
@@ -49,7 +49,7 @@ export default async function AdminPage() {
               <div>
                 <p className="font-semibold text-white">{product.name}</p>
                 <p className="text-xs text-neutral-400">{product.club}</p>
-                <p className="text-xs uppercase text-emerald-500">
+                <p className="text-xs uppercase text-blue-400">
                   {product.category}
                 </p>
                 <p className="text-xs text-neutral-500">

@@ -33,7 +33,7 @@ export default async function NewProductPage({
             name="name"
             required
             placeholder="Ej: River Plate Titular 2024"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -42,7 +42,7 @@ export default async function NewProductPage({
             name="club"
             required
             placeholder="Ej: River Plate"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -50,7 +50,7 @@ export default async function NewProductPage({
           <input
             name="season"
             placeholder="Ej: 2001"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -59,7 +59,7 @@ export default async function NewProductPage({
             name="category"
             required
             defaultValue="jugador"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-amber-500 focus:outline-none"
           >
             <option value="retro">Versión Retro</option>
             <option value="jugador">Versión Jugador</option>
@@ -71,7 +71,7 @@ export default async function NewProductPage({
             name="stock_status"
             required
             defaultValue="stock"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-amber-500 focus:outline-none"
           >
             <option value="stock">En stock</option>
             <option value="encargue">Por encargue</option>
@@ -85,7 +85,7 @@ export default async function NewProductPage({
             min="0"
             step="1"
             required
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -93,12 +93,12 @@ export default async function NewProductPage({
           <input
             name="sizes"
             placeholder="S, M, L, XL"
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-emerald-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
           />
         </label>
         <button
           type="submit"
-          className="mt-2 rounded-lg bg-emerald-600 px-4 py-2 font-semibold text-white transition-colors hover:bg-emerald-500"
+          className="mt-2 rounded-lg bg-amber-500 px-4 py-2 font-semibold text-neutral-950 transition-colors hover:bg-amber-400"
         >
           Guardar remera
         </button>
