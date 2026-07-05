@@ -1,18 +1,29 @@
 import { createClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/ProductCard";
 import { CatalogFilters } from "@/components/CatalogFilters";
-import { Product, ProductCategory, StockStatus } from "@/types/product";
+import { Product, ProductCategory, StockStatus, GarmentType } from "@/types/product";
+
+const GARMENT_TYPES: GarmentType[] = ["remera", "short", "campera", "conjunto"];
 
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ categoria?: string; stock?: string; q?: string }>;
+  searchParams: Promise<{
+    categoria?: string;
+    stock?: string;
+    tipo?: string;
+    q?: string;
+  }>;
 }) {
-  const { categoria, stock, q } = await searchParams;
+  const { categoria, stock, tipo, q } = await searchParams;
   const activeCategory: ProductCategory | "todas" =
     categoria === "retro" || categoria === "jugador" ? categoria : "todas";
   const activeStock: StockStatus | "todas" =
     stock === "stock" || stock === "encargue" ? stock : "todas";
+  const activeGarmentType: GarmentType | "todas" =
+    activeStock === "encargue" && GARMENT_TYPES.includes(tipo as GarmentType)
+      ? (tipo as GarmentType)
+      : "todas";
   const activeSearch = (q || "").trim();
 
   const supabase = await createClient();
@@ -26,6 +37,9 @@ export default async function Home({
   }
   if (activeStock !== "todas") {
     query = query.eq("stock_status", activeStock);
+  }
+  if (activeGarmentType !== "todas") {
+    query = query.eq("garment_type", activeGarmentType);
   }
   if (activeSearch) {
     const safeSearch = activeSearch.replace(/[,()%_]/g, "");
@@ -45,7 +59,12 @@ export default async function Home({
         </p>
       </section>
 
-      <CatalogFilters categoria={activeCategory} stock={activeStock} q={activeSearch} />
+      <CatalogFilters
+        categoria={activeCategory}
+        stock={activeStock}
+        tipo={activeGarmentType}
+        q={activeSearch}
+      />
 
       {products && products.length > 0 ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">

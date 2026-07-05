@@ -1,8 +1,8 @@
 -- Ejecutar este script en Supabase: Dashboard -> SQL Editor -> New query -> Run
 -- (Este archivo refleja el esquema completo, pensado para un proyecto nuevo.
 -- Si ya habías corrido una versión anterior de este archivo, mirá en cambio
--- supabase/migrations/002_multiple_images.sql, 003_stock_status.sql
--- y 004_update_policy.sql)
+-- supabase/migrations/002_multiple_images.sql, 003_stock_status.sql,
+-- 004_update_policy.sql y 005_garment_type.sql)
 
 create table if not exists products (
   id uuid primary key default gen_random_uuid(),
@@ -11,6 +11,7 @@ create table if not exists products (
   season text,
   category text not null check (category in ('retro', 'jugador')),
   stock_status text not null default 'stock' check (stock_status in ('stock', 'encargue')),
+  garment_type text check (garment_type is null or garment_type in ('remera', 'short', 'campera', 'conjunto')),
   price numeric not null check (price >= 0),
   sizes text[] not null default '{}',
   image_urls text[] not null default '{}',

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Product } from "@/types/product";
+import { Product, GARMENT_LABELS } from "@/types/product";
 import { buildWhatsAppLink } from "@/lib/config";
 import { WhatsAppIcon } from "./WhatsAppIcon";
 
@@ -126,6 +126,12 @@ export function ProductLightbox({
             >
               {product.stock_status === "stock" ? "En stock" : "Por encargue"}
             </span>
+            {product.garment_type && (
+              <>
+                {" · "}
+                <span className="text-neutral-400">{GARMENT_LABELS[product.garment_type]}</span>
+              </>
+            )}
           </p>
           <h2 className="font-semibold text-white">{product.name}</h2>
           <p className="text-sm text-neutral-400">

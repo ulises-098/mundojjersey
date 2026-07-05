@@ -40,6 +40,8 @@ export async function createProduct(formData: FormData) {
   const season = ((formData.get("season") as string) || "").trim() || null;
   const category = formData.get("category") as string;
   const stockStatus = formData.get("stock_status") as string;
+  const garmentType =
+    stockStatus === "encargue" ? (formData.get("garment_type") as string) || null : null;
   const price = Number(formData.get("price"));
   const sizes = ((formData.get("sizes") as string) || "")
     .split(",")
@@ -84,6 +86,7 @@ export async function createProduct(formData: FormData) {
     season,
     category,
     stock_status: stockStatus,
+    garment_type: garmentType,
     price,
     sizes,
     image_urls: imageUrls,
@@ -112,6 +115,8 @@ export async function updateProduct(formData: FormData) {
   const season = ((formData.get("season") as string) || "").trim() || null;
   const category = formData.get("category") as string;
   const stockStatus = formData.get("stock_status") as string;
+  const garmentType =
+    stockStatus === "encargue" ? (formData.get("garment_type") as string) || null : null;
   const price = Number(formData.get("price"));
   const sizes = ((formData.get("sizes") as string) || "")
     .split(",")
@@ -174,6 +179,7 @@ export async function updateProduct(formData: FormData) {
       season,
       category,
       stock_status: stockStatus,
+      garment_type: garmentType,
       price,
       sizes,
       image_urls: finalImageUrls,

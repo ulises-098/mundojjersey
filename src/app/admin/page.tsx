@@ -3,7 +3,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "./actions";
 import { DeleteProductForm } from "@/components/DeleteProductForm";
-import { Product } from "@/types/product";
+import { Product, GARMENT_LABELS } from "@/types/product";
 
 export default async function AdminPage() {
   const supabase = await createClient();
@@ -55,6 +55,7 @@ export default async function AdminPage() {
                 </p>
                 <p className="text-xs text-neutral-500">
                   {product.stock_status === "stock" ? "En stock" : "Por encargue"}
+                  {product.garment_type && ` · ${GARMENT_LABELS[product.garment_type]}`}
                 </p>
               </div>
               <div className="mt-2 flex items-center gap-3">
