@@ -44,30 +44,38 @@ export async function createProduct(formData: FormData) {
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);
-  const file = formData.get("image") as File;
+  const files = formData
+    .getAll("images")
+    .filter((f): f is File => f instanceof File && f.size > 0);
 
   if (!name || !club || !category || Number.isNaN(price)) {
     redirect(`/admin/new?error=${encodeURIComponent("Completá todos los campos requeridos")}`);
   }
 
-  if (!file || file.size === 0) {
-    redirect(`/admin/new?error=${encodeURIComponent("Falta la foto de la remera")}`);
+  if (files.length === 0) {
+    redirect(`/admin/new?error=${encodeURIComponent("Falta al menos una foto de la remera")}`);
   }
 
-  const ext = file.name.split(".").pop() || "jpg";
-  const path = `${crypto.randomUUID()}.${ext}`;
+  const imageUrls: string[] = [];
 
-  const { error: uploadError } = await supabase.storage
-    .from("products")
-    .upload(path, file);
+  for (const file of files) {
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${crypto.randomUUID()}.${ext}`;
 
-  if (uploadError) {
-    redirect(`/admin/new?error=${encodeURIComponent("No se pudo subir la imagen")}`);
+    const { error: uploadError } = await supabase.storage
+      .from("products")
+      .upload(path, file);
+
+    if (uploadError) {
+      redirect(`/admin/new?error=${encodeURIComponent("No se pudo subir una de las imágenes")}`);
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("products").getPublicUrl(path);
+
+    imageUrls.push(publicUrl);
   }
-
-  const {
-    data: { publicUrl },
-  } = supabase.storage.from("products").getPublicUrl(path);
 
   const { error: insertError } = await supabase.from("products").insert({
     name,
@@ -76,7 +84,7 @@ export async function createProduct(formData: FormData) {
     category,
     price,
     sizes,
-    image_url: publicUrl,
+    image_urls: imageUrls,
   });
 
   if (insertError) {
@@ -97,13 +105,18 @@ export async function deleteProduct(formData: FormData) {
   if (!user) redirect("/admin/login");
 
   const id = formData.get("id") as string;
-  const imageUrl = formData.get("image_url") as string;
+  const imageUrls = (formData.get("image_urls") as string)
+    ?.split(",")
+    .filter(Boolean);
 
   await supabase.from("products").delete().eq("id", id);
 
-  const path = imageUrl?.split("/products/").pop();
-  if (path) {
-    await supabase.storage.from("products").remove([path]);
+  const paths = (imageUrls || [])
+    .map((url) => url.split("/products/").pop())
+    .filter((p): p is string => !!p);
+
+  if (paths.length > 0) {
+    await supabase.storage.from("products").remove(paths);
   }
 
   revalidatePath("/");

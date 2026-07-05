@@ -38,7 +38,7 @@ export default async function AdminPage() {
           >
             <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
               <Image
-                src={product.image_url}
+                src={product.image_urls[0]}
                 alt={product.name}
                 fill
                 sizes="64px"
@@ -55,7 +55,11 @@ export default async function AdminPage() {
               </div>
               <form action={deleteProduct}>
                 <input type="hidden" name="id" value={product.id} />
-                <input type="hidden" name="image_url" value={product.image_url} />
+                <input
+                  type="hidden"
+                  name="image_urls"
+                  value={product.image_urls.join(",")}
+                />
                 <button className="mt-2 text-xs font-semibold text-red-400 hover:text-red-300">
                   Eliminar
                 </button>

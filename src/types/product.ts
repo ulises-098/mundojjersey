@@ -8,6 +8,6 @@ export interface Product {
   category: ProductCategory;
   price: number;
   sizes: string[];
-  image_url: string;
+  image_urls: string[];
   created_at: string;
 }

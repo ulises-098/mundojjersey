@@ -17,11 +17,12 @@ export default async function NewProductPage({
       )}
       <form action={createProduct} className="flex flex-col gap-4">
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
-          Foto
+          Fotos (podés elegir varias)
           <input
-            name="image"
+            name="images"
             type="file"
             accept="image/*"
+            multiple
             required
             className="text-sm text-neutral-400"
           />
