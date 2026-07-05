@@ -14,9 +14,24 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const description = `Catálogo de remeras retro y de jugador — ${siteConfig.name}. Consultá directo por WhatsApp.`;
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
   title: siteConfig.name,
-  description: `Catálogo de remeras retro y de jugador — ${siteConfig.name}`,
+  description,
+  openGraph: {
+    title: siteConfig.name,
+    description,
+    images: ["/brand/logo.jpg"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: siteConfig.name,
+    description,
+    images: ["/brand/logo.jpg"],
+  },
 };
 
 export default function RootLayout({

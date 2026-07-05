@@ -1,7 +1,8 @@
 -- Ejecutar este script en Supabase: Dashboard -> SQL Editor -> New query -> Run
 -- (Este archivo refleja el esquema completo, pensado para un proyecto nuevo.
 -- Si ya habías corrido una versión anterior de este archivo, mirá en cambio
--- supabase/migrations/002_multiple_images.sql y 003_stock_status.sql)
+-- supabase/migrations/002_multiple_images.sql, 003_stock_status.sql
+-- y 004_update_policy.sql)
 
 create table if not exists products (
   id uuid primary key default gen_random_uuid(),
@@ -32,6 +33,12 @@ create policy "Solo usuarios logueados pueden borrar productos"
 on products for delete
 to authenticated
 using (true);
+
+create policy "Solo usuarios logueados pueden editar productos"
+on products for update
+to authenticated
+using (true)
+with check (true);
 
 -- Storage: bucket público para las fotos de las remeras.
 insert into storage.buckets (id, name, public)

@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
-import { deleteProduct, logout } from "./actions";
+import { logout } from "./actions";
+import { DeleteProductForm } from "@/components/DeleteProductForm";
 import { Product } from "@/types/product";
 
 export default async function AdminPage() {
@@ -56,17 +57,15 @@ export default async function AdminPage() {
                   {product.stock_status === "stock" ? "En stock" : "Por encargue"}
                 </p>
               </div>
-              <form action={deleteProduct}>
-                <input type="hidden" name="id" value={product.id} />
-                <input
-                  type="hidden"
-                  name="image_urls"
-                  value={product.image_urls.join(",")}
-                />
-                <button className="mt-2 text-xs font-semibold text-red-400 hover:text-red-300">
-                  Eliminar
-                </button>
-              </form>
+              <div className="mt-2 flex items-center gap-3">
+                <Link
+                  href={`/admin/${product.id}/edit`}
+                  className="text-xs font-semibold text-amber-400 hover:text-amber-300"
+                >
+                  Editar
+                </Link>
+                <DeleteProductForm id={product.id} imageUrls={product.image_urls} />
+              </div>
             </div>
           </div>
         ))}

@@ -6,13 +6,14 @@ import { Product, ProductCategory, StockStatus } from "@/types/product";
 export default async function Home({
   searchParams,
 }: {
-  searchParams: Promise<{ categoria?: string; stock?: string }>;
+  searchParams: Promise<{ categoria?: string; stock?: string; q?: string }>;
 }) {
-  const { categoria, stock } = await searchParams;
+  const { categoria, stock, q } = await searchParams;
   const activeCategory: ProductCategory | "todas" =
     categoria === "retro" || categoria === "jugador" ? categoria : "todas";
   const activeStock: StockStatus | "todas" =
     stock === "stock" || stock === "encargue" ? stock : "todas";
+  const activeSearch = (q || "").trim();
 
   const supabase = await createClient();
   let query = supabase
@@ -25,6 +26,10 @@ export default async function Home({
   }
   if (activeStock !== "todas") {
     query = query.eq("stock_status", activeStock);
+  }
+  if (activeSearch) {
+    const safeSearch = activeSearch.replace(/[,()%_]/g, "");
+    query = query.or(`name.ilike.%${safeSearch}%,club.ilike.%${safeSearch}%`);
   }
 
   const { data: products } = await query;
@@ -40,7 +45,7 @@ export default async function Home({
         </p>
       </section>
 
-      <CatalogFilters categoria={activeCategory} stock={activeStock} />
+      <CatalogFilters categoria={activeCategory} stock={activeStock} q={activeSearch} />
 
       {products && products.length > 0 ? (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
@@ -50,7 +55,7 @@ export default async function Home({
         </div>
       ) : (
         <p className="text-center text-neutral-500">
-          Todavía no hay remeras cargadas en esta categoría.
+          No encontramos remeras con esos filtros.
         </p>
       )}
     </main>

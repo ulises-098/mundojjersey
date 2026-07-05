@@ -98,6 +98,107 @@ export async function createProduct(formData: FormData) {
   redirect("/admin");
 }
 
+export async function updateProduct(formData: FormData) {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/admin/login");
+
+  const id = formData.get("id") as string;
+  const name = (formData.get("name") as string)?.trim();
+  const club = (formData.get("club") as string)?.trim();
+  const season = ((formData.get("season") as string) || "").trim() || null;
+  const category = formData.get("category") as string;
+  const stockStatus = formData.get("stock_status") as string;
+  const price = Number(formData.get("price"));
+  const sizes = ((formData.get("sizes") as string) || "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  if (!name || !club || !category || Number.isNaN(price)) {
+    redirect(
+      `/admin/${id}/edit?error=${encodeURIComponent("Completá todos los campos requeridos")}`,
+    );
+  }
+
+  const currentImageUrls = ((formData.get("current_image_urls") as string) || "")
+    .split(",")
+    .filter(Boolean);
+  const removedImageUrls = formData.getAll("remove_images") as string[];
+  const keptImageUrls = currentImageUrls.filter(
+    (url) => !removedImageUrls.includes(url),
+  );
+
+  const newFiles = formData
+    .getAll("images")
+    .filter((f): f is File => f instanceof File && f.size > 0);
+
+  const newImageUrls: string[] = [];
+  for (const file of newFiles) {
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${crypto.randomUUID()}.${ext}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("products")
+      .upload(path, file);
+
+    if (uploadError) {
+      redirect(
+        `/admin/${id}/edit?error=${encodeURIComponent("No se pudo subir una de las imágenes")}`,
+      );
+    }
+
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("products").getPublicUrl(path);
+
+    newImageUrls.push(publicUrl);
+  }
+
+  const finalImageUrls = [...keptImageUrls, ...newImageUrls];
+
+  if (finalImageUrls.length === 0) {
+    redirect(
+      `/admin/${id}/edit?error=${encodeURIComponent("Debe quedar al menos una foto")}`,
+    );
+  }
+
+  const { error: updateError } = await supabase
+    .from("products")
+    .update({
+      name,
+      club,
+      season,
+      category,
+      stock_status: stockStatus,
+      price,
+      sizes,
+      image_urls: finalImageUrls,
+    })
+    .eq("id", id);
+
+  if (updateError) {
+    redirect(
+      `/admin/${id}/edit?error=${encodeURIComponent("No se pudo guardar los cambios")}`,
+    );
+  }
+
+  const removedPaths = removedImageUrls
+    .map((url) => url.split("/products/").pop())
+    .filter((p): p is string => !!p);
+
+  if (removedPaths.length > 0) {
+    await supabase.storage.from("products").remove(removedPaths);
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+  redirect("/admin");
+}
+
 export async function deleteProduct(formData: FormData) {
   const supabase = await createClient();
 

@@ -1,4 +1,5 @@
 import { login } from "../actions";
+import { SubmitButton } from "@/components/SubmitButton";
 
 export default async function LoginPage({
   searchParams,
@@ -32,12 +33,12 @@ export default async function LoginPage({
           placeholder="Contraseña"
           className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
         />
-        <button
-          type="submit"
+        <SubmitButton
+          pendingText="Entrando..."
           className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-neutral-950 transition-colors hover:bg-amber-400"
         >
           Entrar
-        </button>
+        </SubmitButton>
       </form>
     </main>
   );

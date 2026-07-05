@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Product } from "@/types/product";
 import { buildWhatsAppLink } from "@/lib/config";
 import { ProductLightbox } from "./ProductLightbox";
+import { WhatsAppIcon } from "./WhatsAppIcon";
 
 const currencyFormatter = new Intl.NumberFormat("es-AR", {
   style: "currency",
@@ -109,6 +110,7 @@ export function ProductCard({ product }: { product: Product }) {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-emerald-500"
             >
+              <WhatsAppIcon className="h-4 w-4" />
               WhatsApp
             </a>
           </div>
