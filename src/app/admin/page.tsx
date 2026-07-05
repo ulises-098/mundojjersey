@@ -52,6 +52,9 @@ export default async function AdminPage() {
                 <p className="text-xs uppercase text-emerald-500">
                   {product.category}
                 </p>
+                <p className="text-xs text-neutral-500">
+                  {product.stock_status === "stock" ? "En stock" : "Por encargue"}
+                </p>
               </div>
               <form action={deleteProduct}>
                 <input type="hidden" name="id" value={product.id} />

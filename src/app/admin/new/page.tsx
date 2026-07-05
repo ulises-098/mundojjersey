@@ -66,6 +66,18 @@ export default async function NewProductPage({
           </select>
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
+          Disponibilidad
+          <select
+            name="stock_status"
+            required
+            defaultValue="stock"
+            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-emerald-500 focus:outline-none"
+          >
+            <option value="stock">En stock</option>
+            <option value="encargue">Por encargue</option>
+          </select>
+        </label>
+        <label className="flex flex-col gap-1 text-sm text-neutral-300">
           Precio (ARS)
           <input
             name="price"

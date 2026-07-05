@@ -39,6 +39,7 @@ export async function createProduct(formData: FormData) {
   const club = (formData.get("club") as string)?.trim();
   const season = ((formData.get("season") as string) || "").trim() || null;
   const category = formData.get("category") as string;
+  const stockStatus = formData.get("stock_status") as string;
   const price = Number(formData.get("price"));
   const sizes = ((formData.get("sizes") as string) || "")
     .split(",")
@@ -82,6 +83,7 @@ export async function createProduct(formData: FormData) {
     club,
     season,
     category,
+    stock_status: stockStatus,
     price,
     sizes,
     image_urls: imageUrls,

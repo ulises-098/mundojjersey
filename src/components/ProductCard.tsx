@@ -58,6 +58,15 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
             {product.category === "retro" ? "Retro" : "Jugador"}
           </span>
+          <span
+            className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+              product.stock_status === "stock"
+                ? "bg-black/70 text-emerald-400"
+                : "bg-black/70 text-amber-400"
+            }`}
+          >
+            {product.stock_status === "stock" ? "En stock" : "Por encargue"}
+          </span>
 
           {hasMultipleImages && (
             <>
