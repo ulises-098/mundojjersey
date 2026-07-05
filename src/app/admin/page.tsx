@@ -19,7 +19,7 @@ export default async function AdminPage() {
         <div className="flex gap-3">
           <Link
             href="/admin/new"
-            className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-semibold text-neutral-950 hover:bg-amber-400"
+            className="rounded-lg bg-[#c9a961] px-4 py-2 text-sm font-semibold text-[#0b1220] hover:bg-[#d9bd7e]"
           >
             + Nueva remera
           </Link>
@@ -35,7 +35,7 @@ export default async function AdminPage() {
         {(products as Product[] | null)?.map((product) => (
           <div
             key={product.id}
-            className="flex gap-4 rounded-xl border border-white/10 bg-neutral-900 p-3"
+            className="flex gap-4 rounded-xl border border-white/10 bg-[#101a2c] p-3"
           >
             <div className="relative h-20 w-16 shrink-0 overflow-hidden rounded-lg bg-neutral-800">
               <Image
@@ -60,7 +60,7 @@ export default async function AdminPage() {
               <div className="mt-2 flex items-center gap-3">
                 <Link
                   href={`/admin/${product.id}/edit`}
-                  className="text-xs font-semibold text-amber-400 hover:text-amber-300"
+                  className="text-xs font-semibold text-[#c9a961] hover:text-[#d9bd7e]"
                 >
                   Editar
                 </Link>

@@ -42,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <>
-      <div className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 transition-transform hover:-translate-y-1 hover:border-amber-400/40">
+      <div className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#101a2c] transition-transform hover:-translate-y-1 hover:border-[#c9a961]/40">
         <div
           className="relative aspect-4/5 w-full cursor-zoom-in overflow-hidden bg-neutral-800"
           onTouchStart={handleTouchStart}

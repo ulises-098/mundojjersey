@@ -47,7 +47,7 @@ export default async function EditProductPage({
           <div className="flex flex-wrap gap-3">
             {product.image_urls.map((url) => (
               <label key={url} className="flex flex-col items-center gap-1 text-xs text-neutral-400">
-                <div className="relative h-20 w-16 overflow-hidden rounded-lg bg-neutral-800">
+                <div className="relative h-20 w-16 overflow-hidden rounded-lg bg-[#101a2c]">
                   <Image src={url} alt="" fill className="object-cover" sizes="64px" />
                 </div>
                 <span className="flex items-center gap-1">
@@ -75,7 +75,7 @@ export default async function EditProductPage({
             name="name"
             required
             defaultValue={product.name}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -84,7 +84,7 @@ export default async function EditProductPage({
             name="club"
             required
             defaultValue={product.club}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -92,7 +92,7 @@ export default async function EditProductPage({
           <input
             name="season"
             defaultValue={product.season ?? ""}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -101,7 +101,7 @@ export default async function EditProductPage({
             name="category"
             required
             defaultValue={product.category}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white focus:border-[#c9a961] focus:outline-none"
           >
             <option value="retro">Versión Retro</option>
             <option value="jugador">Versión Jugador</option>
@@ -113,7 +113,7 @@ export default async function EditProductPage({
             name="stock_status"
             required
             defaultValue={product.stock_status}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white focus:border-[#c9a961] focus:outline-none"
           >
             <option value="stock">En stock</option>
             <option value="encargue">Por encargue</option>
@@ -128,7 +128,7 @@ export default async function EditProductPage({
             step="1"
             required
             defaultValue={product.price}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
           />
         </label>
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
@@ -136,12 +136,12 @@ export default async function EditProductPage({
           <input
             name="sizes"
             defaultValue={product.sizes.join(", ")}
-            className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+            className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
           />
         </label>
         <SubmitButton
           pendingText="Guardando..."
-          className="mt-2 rounded-lg bg-amber-500 px-4 py-2 font-semibold text-neutral-950 transition-colors hover:bg-amber-400"
+          className="mt-2 rounded-lg bg-[#c9a961] px-4 py-2 font-semibold text-[#0b1220] transition-colors hover:bg-[#d9bd7e]"
         >
           Guardar cambios
         </SubmitButton>

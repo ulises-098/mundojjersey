@@ -110,7 +110,7 @@ export function ProductLightbox({
       </div>
 
       <div
-        className="w-full shrink-0 border-t border-white/10 bg-neutral-900 px-4 py-4"
+        className="w-full shrink-0 border-t border-white/10 bg-[#101a2c] px-4 py-4"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mx-auto flex max-w-xl flex-col gap-1.5">

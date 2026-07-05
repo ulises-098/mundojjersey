@@ -45,7 +45,7 @@ export function CatalogFilters({
   }
 
   const selectClass =
-    "rounded-full border border-white/10 bg-neutral-800 px-4 py-2 text-sm font-semibold text-neutral-200 focus:border-amber-500 focus:outline-none";
+    "rounded-full border border-white/10 bg-[#101a2c] px-4 py-2 text-sm font-semibold text-neutral-200 focus:border-[#c9a961] focus:outline-none";
 
   return (
     <div className="mb-8 flex flex-col items-center gap-3">
@@ -54,7 +54,7 @@ export function CatalogFilters({
         value={search}
         onChange={(e) => handleSearchChange(e.target.value)}
         placeholder="Buscar por nombre o club..."
-        className="w-full max-w-sm rounded-full border border-white/10 bg-neutral-800 px-4 py-2 text-sm text-neutral-200 placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+        className="w-full max-w-sm rounded-full border border-white/10 bg-[#101a2c] px-4 py-2 text-sm text-neutral-200 placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
       />
       <div className="flex flex-wrap justify-center gap-3">
         <select

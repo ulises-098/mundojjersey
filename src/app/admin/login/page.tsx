@@ -24,18 +24,18 @@ export default async function LoginPage({
           type="email"
           required
           placeholder="Email"
-          className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+          className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
         />
         <input
           name="password"
           type="password"
           required
           placeholder="Contraseña"
-          className="rounded-lg border border-white/10 bg-neutral-900 px-4 py-2 text-white placeholder:text-neutral-500 focus:border-amber-500 focus:outline-none"
+          className="rounded-lg border border-white/10 bg-[#101a2c] px-4 py-2 text-white placeholder:text-neutral-500 focus:border-[#c9a961] focus:outline-none"
         />
         <SubmitButton
           pendingText="Entrando..."
-          className="rounded-lg bg-amber-500 px-4 py-2 font-semibold text-neutral-950 transition-colors hover:bg-amber-400"
+          className="rounded-lg bg-[#c9a961] px-4 py-2 font-semibold text-[#0b1220] transition-colors hover:bg-[#d9bd7e]"
         >
           Entrar
         </SubmitButton>
