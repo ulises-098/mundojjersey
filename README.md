@@ -1,4 +1,4 @@
-# MundoJersey — Catálogo de remeras
+# Mundo JJersey — Catálogo de remeras
 
 Web de catálogo de remeras (retro / jugador) con consulta directa por WhatsApp
 y un panel de administración para subir y borrar remeras.
@@ -53,7 +53,7 @@ y un panel de administración para subir y borrar remeras.
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
-NEXT_PUBLIC_SITE_NAME=MundoJersey
+NEXT_PUBLIC_SITE_NAME=Mundo JJersey
 NEXT_PUBLIC_WHATSAPP_NUMBER=5491122334455
 ```
 
