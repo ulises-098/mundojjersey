@@ -55,18 +55,18 @@ export function ProductCard({ product }: { product: Product }) {
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="(max-width: 768px) 50vw, 25vw"
           />
-          <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
-            {product.category === "retro" ? "Retro" : "Jugador"}
-          </span>
-          <span
-            className={`absolute right-3 top-3 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
-              product.stock_status === "stock"
-                ? "bg-black/70 text-emerald-400"
-                : "bg-black/70 text-amber-400"
-            }`}
-          >
-            {product.stock_status === "stock" ? "En stock" : "Por encargue"}
-          </span>
+          <div className="absolute left-3 top-3 flex flex-col items-start gap-1">
+            <span className="rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-emerald-400">
+              {product.category === "retro" ? "Retro" : "Jugador"}
+            </span>
+            <span
+              className={`rounded-full bg-black/70 px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
+                product.stock_status === "stock" ? "text-emerald-400" : "text-amber-400"
+              }`}
+            >
+              {product.stock_status === "stock" ? "En stock" : "Por encargue"}
+            </span>
+          </div>
 
           {hasMultipleImages && (
             <>
@@ -114,7 +114,7 @@ export function ProductCard({ product }: { product: Product }) {
           {product.sizes?.length > 0 && (
             <p className="text-xs text-neutral-500">Talles: {product.sizes.join(", ")}</p>
           )}
-          <div className="mt-auto flex items-center justify-between pt-3">
+          <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-3">
             <span className="text-lg font-bold text-white">
               {currencyFormatter.format(product.price)}
             </span>
