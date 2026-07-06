@@ -52,10 +52,10 @@ export default async function Home({
     <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-10">
       <section className="mb-10 text-center">
         <h1 className="text-3xl font-extrabold text-white sm:text-4xl">
-          Catálogo de Remeras
+          Catálogo Deportivo
         </h1>
         <p className="mt-2 text-neutral-400">
-          Encontrá tu camiseta y consultanos directo por WhatsApp.
+          Remeras, shorts, camperas y conjuntos — consultá directo por WhatsApp.
         </p>
       </section>
 
@@ -74,7 +74,7 @@ export default async function Home({
         </div>
       ) : (
         <p className="text-center text-neutral-500">
-          No encontramos remeras con esos filtros.
+          No encontramos productos con esos filtros.
         </p>
       )}
     </main>
