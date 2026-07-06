@@ -1,6 +1,7 @@
 import { createProduct } from "../actions";
 import { SubmitButton } from "@/components/SubmitButton";
 import { StockAndGarmentFields } from "@/components/StockAndGarmentFields";
+import { PhotoPicker } from "@/components/PhotoPicker";
 
 export default async function NewProductPage({
   searchParams,
@@ -18,17 +19,7 @@ export default async function NewProductPage({
         </p>
       )}
       <form action={createProduct} className="flex flex-col gap-4">
-        <label className="flex flex-col gap-1 text-sm text-neutral-300">
-          Fotos (podés elegir varias)
-          <input
-            name="images"
-            type="file"
-            accept="image/*"
-            multiple
-            required
-            className="text-sm text-neutral-400"
-          />
-        </label>
+        <PhotoPicker required />
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
           Nombre de la remera
           <input

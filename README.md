@@ -55,10 +55,40 @@ NEXT_PUBLIC_SUPABASE_URL=https://tu-proyecto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu-anon-key
 NEXT_PUBLIC_SITE_NAME=Mundo JJersey
 NEXT_PUBLIC_WHATSAPP_NUMBER=5491122334455
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+NEXT_PUBLIC_GOOGLE_API_KEY=
+NEXT_PUBLIC_GOOGLE_APP_ID=
 ```
 
 `NEXT_PUBLIC_WHATSAPP_NUMBER` es el número de WhatsApp del negocio, con código
 de país, sin espacios ni signos (ej: Argentina `5491122334455`).
+
+Las tres variables `NEXT_PUBLIC_GOOGLE_*` son opcionales — si se dejan vacías,
+el botón "Elegir desde Google Drive" simplemente no aparece en el admin.
+
+## Google Drive (opcional, para elegir fotos directo desde Drive)
+
+1. Crear un proyecto en [console.cloud.google.com](https://console.cloud.google.com).
+2. En **APIs y servicios → Biblioteca**, habilitar **Google Picker API** y
+   **Google Drive API**.
+3. En **APIs y servicios → Pantalla de consentimiento de OAuth**: tipo Externo,
+   agregar el scope `.../auth/drive.file`, y agregar como "usuarios de prueba"
+   los emails de quienes vayan a usar el panel de admin (mientras la app esté
+   en modo "Prueba", solo esos emails pueden loguearse con Google ahí).
+4. En **Credenciales → Crear credenciales**:
+   - **ID de cliente de OAuth** (tipo Aplicación web), agregando como
+     "Orígenes autorizados de JavaScript" tanto `http://localhost:3000` como
+     la URL de producción (ej: `https://mundojjersey.vercel.app`) →
+     `NEXT_PUBLIC_GOOGLE_CLIENT_ID`.
+   - **Clave de API**, restringida a Picker API y Drive API →
+     `NEXT_PUBLIC_GOOGLE_API_KEY`.
+5. El **Número de proyecto** (visible en la página principal del proyecto) →
+   `NEXT_PUBLIC_GOOGLE_APP_ID`.
+
+Cuando el admin usa "Elegir desde Google Drive" por primera vez, el navegador
+le va a pedir loguearse con Google y dar permiso — el sitio nunca ve la
+contraseña, y solo puede acceder a las fotos que el usuario elige explícitamente
+en el selector (no a todo el Drive).
 
 ## Uso del panel de administración
 

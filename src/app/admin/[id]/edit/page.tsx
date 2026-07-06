@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { updateProduct } from "../../actions";
 import { SubmitButton } from "@/components/SubmitButton";
 import { StockAndGarmentFields } from "@/components/StockAndGarmentFields";
+import { PhotoPicker } from "@/components/PhotoPicker";
 import { Product } from "@/types/product";
 
 export default async function EditProductPage({
@@ -60,16 +61,7 @@ export default async function EditProductPage({
           </div>
         </div>
 
-        <label className="flex flex-col gap-1 text-sm text-neutral-300">
-          Agregar fotos nuevas (opcional)
-          <input
-            name="images"
-            type="file"
-            accept="image/*"
-            multiple
-            className="text-sm text-neutral-400"
-          />
-        </label>
+        <PhotoPicker label="Agregar fotos nuevas (opcional)" />
         <label className="flex flex-col gap-1 text-sm text-neutral-300">
           Nombre de la remera
           <input
