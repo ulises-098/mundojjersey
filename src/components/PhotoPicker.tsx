@@ -75,6 +75,9 @@ export function PhotoPicker({
   const [gapiReady, setGapiReady] = useState(false);
   const [gisReady, setGisReady] = useState(false);
   const [loadingDrive, setLoadingDrive] = useState(false);
+  const [driveError, setDriveError] = useState<string | null>(null);
+
+  const DRIVE_DOWNLOAD_TIMEOUT_MS = 20000;
 
   useEffect(() => {
     if (!inputRef.current) return;
@@ -108,22 +111,40 @@ export function PhotoPicker({
           if (data.action !== window.google.picker.Action.PICKED) return;
 
           setLoadingDrive(true);
+          setDriveError(null);
+          let failedCount = 0;
           try {
             const downloaded: File[] = [];
             for (const doc of data.docs) {
-              const res = await fetch(
-                `https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media`,
-                { headers: { Authorization: `Bearer ${accessToken}` } },
-              );
-              if (!res.ok) continue;
-              const blob = await res.blob();
-              downloaded.push(
-                new File([blob], doc.name || `drive-${doc.id}.jpg`, {
-                  type: blob.type || "image/jpeg",
-                }),
-              );
+              const controller = new AbortController();
+              const timeout = setTimeout(() => controller.abort(), DRIVE_DOWNLOAD_TIMEOUT_MS);
+              try {
+                const res = await fetch(
+                  `https://www.googleapis.com/drive/v3/files/${doc.id}?alt=media`,
+                  { headers: { Authorization: `Bearer ${accessToken}` }, signal: controller.signal },
+                );
+                if (!res.ok) {
+                  failedCount += 1;
+                  continue;
+                }
+                const blob = await res.blob();
+                downloaded.push(
+                  new File([blob], doc.name || `drive-${doc.id}.jpg`, {
+                    type: blob.type || "image/jpeg",
+                  }),
+                );
+              } catch {
+                failedCount += 1;
+              } finally {
+                clearTimeout(timeout);
+              }
             }
             setFiles((prev) => [...prev, ...downloaded]);
+            if (failedCount > 0) {
+              setDriveError(
+                `No se pudieron descargar ${failedCount} foto(s) de Drive. Si usás Brave, probá bajando el "Shield" para este sitio, o intentá con otro navegador.`,
+              );
+            }
           } finally {
             setLoadingDrive(false);
           }
@@ -186,6 +207,8 @@ export function PhotoPicker({
           {loadingDrive ? "Cargando de Drive..." : "Elegir desde Google Drive"}
         </button>
       )}
+
+      {driveError && <p className="text-xs text-red-400">{driveError}</p>}
 
       {files.length > 0 && (
         <div className="flex flex-wrap gap-2">
