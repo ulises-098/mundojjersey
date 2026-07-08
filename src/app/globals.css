@@ -30,6 +30,12 @@ body {
   animation: marquee 22s linear infinite;
 }
 
-.animate-marquee:hover {
-  animation-play-state: paused;
+/* Solo pausar con el mouse en dispositivos que realmente tienen hover
+   (desktop). En celulares, "hover" queda pegado tras tocar un elemento
+   hasta el próximo toque en otro lado, lo que dejaba la animación
+   trabada después de elegir una sugerencia. */
+@media (hover: hover) and (pointer: fine) {
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
 }
