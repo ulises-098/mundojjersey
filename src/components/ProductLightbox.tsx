@@ -200,29 +200,31 @@ export function ProductLightbox({
               <p className="mb-2 text-sm font-semibold text-white">
                 También te puede interesar
               </p>
-              <div className="flex gap-3 overflow-x-auto pb-1">
-                {related.map((item) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => selectRelated(item)}
-                    className="flex w-24 shrink-0 flex-col gap-1 text-left"
-                  >
-                    <div className="relative h-24 w-24 overflow-hidden rounded-lg bg-neutral-800">
-                      <Image
-                        src={item.image_urls[0]}
-                        alt={item.name}
-                        fill
-                        className="object-cover"
-                        sizes="96px"
-                      />
-                    </div>
-                    <span className="truncate text-xs text-neutral-300">{item.name}</span>
-                    <span className="text-xs font-semibold text-white">
-                      {currencyFormatter.format(item.price)}
-                    </span>
-                  </button>
-                ))}
+              <div className="overflow-hidden">
+                <div className="flex w-max animate-marquee gap-3 pb-1">
+                  {[...related, ...related].map((item, i) => (
+                    <button
+                      key={`${item.id}-${i}`}
+                      type="button"
+                      onClick={() => selectRelated(item)}
+                      className="flex w-24 shrink-0 flex-col gap-1 text-left"
+                    >
+                      <div className="relative h-24 w-24 overflow-hidden rounded-lg bg-neutral-800">
+                        <Image
+                          src={item.image_urls[0]}
+                          alt={item.name}
+                          fill
+                          className="object-cover"
+                          sizes="96px"
+                        />
+                      </div>
+                      <span className="truncate text-xs text-neutral-300">{item.name}</span>
+                      <span className="text-xs font-semibold text-white">
+                        {currencyFormatter.format(item.price)}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
           )}
