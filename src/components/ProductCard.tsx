@@ -120,7 +120,6 @@ export function ProductCard({ product }: { product: Product }) {
       {lightboxOpen && (
         <ProductLightbox
           product={product}
-          images={images}
           initialIndex={index}
           onClose={() => setLightboxOpen(false)}
         />
